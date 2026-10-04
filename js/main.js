@@ -108,6 +108,8 @@
     });
   });
 
+  gsap.fromTo('.partners__img img', { yPercent: -6, scale: 1.08 }, { yPercent: 6, scale: 1, ease: 'none', scrollTrigger: { trigger: '.partners', start: 'top bottom', end: 'bottom top', scrub: true } });
+
   /* ---------- team: parallax portraits ---------- */
   $$('.person__img span').forEach(s => gsap.fromTo(s, { yPercent: 18 }, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: s.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
   mm.add('(min-width: 900px)', () => { $$('.person').forEach((p, i) => gsap.to(p, { y: i % 2 ? 60 : -20, ease: 'none', scrollTrigger: { trigger: '.team__grid', start: 'top bottom', end: 'bottom top', scrub: true } })); });

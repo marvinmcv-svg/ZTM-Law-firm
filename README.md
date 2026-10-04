@@ -25,5 +25,5 @@ Real content was taken from ztm-abogados.com (Oct 2026): firm history, mission/v
 2. Associate roles: the 7 associates are named from their photo filenames (the old site shows no names or roles). Confirm names, and say which belong to Litigation vs Corporate.
 3. Larry Monasterios Torrico has no photo or bio on the old site (placeholder monogram).
 4. Real testimonials/case results, if the firm wants them (none were published, so none are invented).
-5. Privacy policy / legal notice pages; Facebook and any other social links.
+
 6. Vercel env vars: `ANTHROPIC_API_KEY` (optional, LLM answers in the chat) and `LEAD_WEBHOOK_URL` (Slack/Zapier/CRM; without it `/api/lead` returns 503 and the UI falls back to mailto/WhatsApp).

@@ -7,7 +7,7 @@
     'hero.lead': 'We prevent contingencies and guide those facing complex, high-risk situations. Companies and individuals have trusted our counsel since 2011.',
     'hero.cta1': 'Request a consultation', 'hero.cta2': 'Talk to our AI reception',
     'hero.live': 'Reception available 24/7', 'hero.cardT': 'Request an attorney', 'hero.cardS': 'Tell us about your matter and our team will get in touch with you.', 'hero.scroll': 'Scroll',
-    'firm.eyebrow': 'The Firm',
+    'firm.eyebrow': 'The Firm', 'firm.cap': 'The partners of ZTM Abogados Asociados',
     'firm.text': 'We are a team of legal professionals whose main goal is to prevent any contingency for those we advise, and to guide those in complex, high-risk situations. We offer not only a legal service but personal attention to every client, who becomes part of the growth of the firm.',
     'stats.since': 'Year founded in Santa Cruz', 'stats.exp': 'Years of experience in the legal field, nationally and internationally', 'stats.areas': 'Practice areas', 'stats.offices': 'Offices: Santa Cruz and La Paz',
     'areas.eyebrow': 'Practice areas', 'areas.title': 'Specialists in every area of law.',
