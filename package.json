@@ -1,0 +1,21 @@
+{
+  "name": "ztm-abogados-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ZTM Abogados premium law firm website",
+  "scripts": {
+    "build:scene": "esbuild src/scene.js --bundle --minify --format=iife --global-name=ZTMScene --outfile=assets/js/scene.min.js",
+    "dev": "npx serve ."
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource-variable/manrope": "^5.2.8",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "playwright-core": "^1.63.0"
+  }
+}
