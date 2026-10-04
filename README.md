@@ -2,13 +2,19 @@
 
 Static, build-free site (HTML/CSS/JS) with a WebGL hero, GSAP motion, bilingual ES/EN, an AI receptionist and a WhatsApp widget. Designed with the [taste-skill](https://github.com/Leonxlnx/taste-skill) "Editorial Luxury" direction: ink + antique gold, Fraunces + Manrope, double-bezel cards, button-in-button CTAs, custom cubic-bezier motion, grain, floating glass nav.
 
-## Run
+## Run locally
+Needs Node 18+ (nodejs.org). From the unzipped folder:
 ```
-npm install
-npx serve .          # any static server works
-npm run build:scene  # only if you edit src/scene.js (rebundles Three.js)
+npm install      # one time (only needed to rebuild the 3D scene or images)
+npm start        # http://localhost:3000
 ```
-Deploy on Vercel as-is (`/api` holds optional serverless functions).
+`npm start` serves the site and runs the `/api` functions, so the contact form and AI receptionist work end to end. Submitted leads print in the terminal. To enable LLM answers in the chat: `ANTHROPIC_API_KEY=sk-ant-... npm start` (Windows PowerShell: `$env:ANTHROPIC_API_KEY="sk-ant-..."; npm start`).
+No Node? `python3 -m http.server 8000` also shows the site, but the form and chat then fall back to email/WhatsApp.
+
+## Put it on the web
+- **Vercel (recommended, supports /api):** `npx vercel` for a preview URL, `npx vercel --prod` for production. Add env vars `ANTHROPIC_API_KEY` and `LEAD_WEBHOOK_URL` in the Vercel dashboard (Project > Settings > Environment Variables). Or import the GitHub repo at vercel.com/new.
+- **Netlify / any static host:** drag the folder in (netlify.com/drop). Everything works except `/api`: the form falls back to email and the chat to its built-in rules.
+- Then point `www.ztm-abogados.com` at it from your domain provider.
 
 ## What is on the page
 Preloader · floating glass nav + fullscreen menu · Three.js gold 3D object over a fluid shader gradient that shifts palette on scroll · masked headline reveal · marquee · scrubbed word-by-word manifesto · animated stats · pinned horizontal practice-area pan with 3D tilt · sticky-stack method · team · "why us" · testimonials · insights · FAQ · contact form + WhatsApp · legal disclaimer · cookie consent · SEO (meta, OG, JSON-LD `LegalService`) · reduced-motion support · mobile layouts.

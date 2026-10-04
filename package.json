@@ -4,8 +4,9 @@
   "private": true,
   "description": "ZTM Abogados premium law firm website",
   "scripts": {
+    "start": "node server.js",
     "build:scene": "esbuild src/scene.js --bundle --minify --format=iife --global-name=ZTMScene --outfile=assets/js/scene.min.js",
-    "dev": "npx serve ."
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.9",
