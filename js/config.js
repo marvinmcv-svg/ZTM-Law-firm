@@ -1,16 +1,16 @@
-/* ZTM Abogados — single source of truth for firm details.
-   !! Everything below is PLACEHOLDER data. Replace with real values before launch. */
+/* ZTM Abogados: single source of truth for firm details.
+   Source: ztm-abogados.com (scraped Oct 2026). Items marked TODO are not on the old site; fill them in. */
 window.ZTM = {
-  name: 'ZTM Abogados',
-  phone: '+34 900 000 000',
-  phoneRaw: '+34900000000',
-  whatsapp: '34600000000',          // international format, digits only
-  email: 'contacto@ztm-abogados.com',
-  address: 'Calle Ejemplo 1, 1º, 28001 Madrid',
-  linkedin: 'https://www.linkedin.com/',
-  instagram: 'https://www.instagram.com/',
-  stats: { years: 20, cases: 1500, success: 96, response: 24 },
-  // Optional backends (see README). Leave '' to fall back to WhatsApp / mailto.
-  chatEndpoint: '/api/chat',        // AI receptionist LLM proxy (Vercel function in /api)
-  leadEndpoint: '/api/lead'         // receives contact form + chat leads
+  name: 'ZTM Abogados Asociados Soc. Civ.',
+  phone: '(+591) 3 355 9955',
+  phoneRaw: '+59133559955',
+  whatsapp: '',                      // TODO: Bolivian mobile in international format, digits only, e.g. 59170000000. Empty = wa.me opens a contact picker.
+  email: 'central@ztm-abogados.com',
+  address: 'C. Dechia No. 29, Barrio Urbari, Santa Cruz de la Sierra, Bolivia',
+  facebook: 'https://www.facebook.com/ztm.abogados/',
+  since: 2011,
+  stats: { since: 2011, experience: 50, areas: 10, offices: 2 },
+  // Optional backends (see README). The UI falls back to mailto / WhatsApp when they are not deployed.
+  chatEndpoint: '/api/chat',
+  leadEndpoint: '/api/lead'
 };

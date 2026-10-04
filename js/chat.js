@@ -9,7 +9,7 @@
   const history = []; let open = false, started = false, flow = null, busy = false;
   const lead = {};
 
-  const AREAS = [['Corporativo', 'Corporate'], ['Litigios', 'Litigation'], ['Inmobiliario', 'Real Estate'], ['Familia', 'Family'], ['Penal', 'Criminal'], ['Laboral', 'Employment'], ['Propiedad Intelectual', 'IP'], ['Inmigración', 'Immigration'], ['Otro', 'Other']];
+  const AREAS = [['Societario', 'Corporate'], ['Civil Comercial', 'Civil & Commercial'], ['Bienes Raíces', 'Real Estate'], ['Tributario / Aduanero', 'Tax / Customs'], ['Laboral', 'Employment'], ['Arbitraje', 'Arbitration'], ['Propiedad Intelectual', 'IP'], ['Medio Ambiente', 'Environmental'], ['Otro', 'Other']];
 
   function bubble(text, who) {
     const d = document.createElement('div'); d.className = 'msg msg--' + who; d.textContent = text; log.appendChild(d);
@@ -65,19 +65,19 @@
     try { const r = await fetch(C.leadEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ source: 'ai-receptionist', lang: I.lang }, lead)) }); ok = r.ok; } catch (e) {}
     t.remove();
     const wa = window.ZTM_waLink(`${L('Hola, soy', 'Hello, I am')} ${lead.name}. ${L('Área', 'Area')}: ${lead.area}. ${lead.summary}. ${L('Contacto', 'Contact')}: ${lead.contact}`);
-    if (ok) await say(L('Solicitud enviada. Un abogado le contactará en menos de 24 horas' + (lead.urgency === 'urgent' ? ' (priorizada por urgencia).' : '.'), 'Request sent. An attorney will contact you within 24 hours' + (lead.urgency === 'urgent' ? ' (prioritized as urgent).' : '.')), 300);
+    if (ok) await say(L('Solicitud enviada. Un abogado del estudio se pondrá en contacto con usted' + (lead.urgency === 'urgent' ? ' (marcada como urgente).' : '.'), 'Request sent. An attorney from the firm will contact you' + (lead.urgency === 'urgent' ? ' (marked as urgent).' : '.')), 300);
     else await say(L('No pude enviarla automáticamente. Para no perder tiempo, puede enviarnos el resumen por WhatsApp con un clic.', 'I could not send it automatically. To save time, you can send us the summary on WhatsApp in one click.'), 300);
     setChips([[L('Enviar también por WhatsApp', 'Also send via WhatsApp'), () => window.open(wa, '_blank')], [L('Menú', 'Menu'), mainMenu]]);
   }
 
   /* ---------- local knowledge (fallback when no LLM endpoint) ---------- */
   const KB = {
-    areas: () => L('Trabajamos en derecho corporativo, litigios y arbitraje, inmobiliario, familia y sucesiones, penal, laboral, propiedad intelectual e inmigración.', 'We practice corporate, litigation and arbitration, real estate, family and estates, criminal, employment, intellectual property and immigration law.'),
-    fees: () => L('La primera orientación es gratuita. Después presentamos un presupuesto por escrito: tarifa fija, por hitos u horas con tope, según el asunto.', 'Initial guidance is free. After that we provide a written quote: fixed fee, milestones or capped hours, depending on the matter.'),
-    hours: () => L(`Atendemos de lunes a viernes de 9:00 a 19:00. Estamos en ${C.address}. Esta recepción funciona 24/7 y también puede llamarnos al ${C.phone}.`, `We are open Monday to Friday, 9:00 to 19:00, at ${C.address}. This reception runs 24/7 and you can also call us at ${C.phone}.`),
-    lang: () => L('Atendemos en español e inglés.', 'We serve clients in Spanish and English.'),
-    conf: () => L('Toda comunicación está protegida por el secreto profesional y gestionada con protocolos de seguridad.', 'All communication is protected by professional privilege and handled under security protocols.'),
-    urgent: () => L('Si es una urgencia (detención, citación judicial, plazo inminente), llámenos ahora al ' + C.phone + ' o escriba por WhatsApp. También puedo registrar su caso como urgente.', 'If it is urgent (arrest, court summons, imminent deadline), call us now at ' + C.phone + ' or message on WhatsApp. I can also log your matter as urgent.'),
+    areas: () => L('Trabajamos en derecho societario, civil comercial, bienes raíces, conciliación y arbitraje, tributario, aduanero y financiero, laboral, medio ambiente, propiedad intelectual, agrario y administrativo y regulatorio.', 'We practice corporate, civil and commercial, real estate, conciliation and arbitration, tax, customs and finance, employment, environmental, intellectual property, agrarian, and administrative and regulatory law.'),
+    fees: () => L('Los honorarios dependen de cada caso. Un abogado del estudio le explicará el alcance y le presentará una propuesta clara; si lo desea, registro su caso para que le contacten.', 'Fees depend on each matter. An attorney will explain the scope and give you a clear proposal; if you like, I can log your matter so they contact you.'),
+    hours: () => L(`Nuestra oficina central está en ${C.address}, y tenemos una oficina legal en La Paz. Puede llamarnos al ${C.phone} o escribir a ${C.email}. Esta recepción funciona las 24 horas.`, `Our head office is at ${C.address}, and we have a legal office in La Paz. You can call us at ${C.phone} or email ${C.email}. This reception runs 24/7.`),
+    lang: () => L('Atendemos en español.', 'We serve clients in Spanish.'),
+    conf: () => L('Su información está amparada por el secreto profesional y se maneja con la máxima reserva.', 'Your information is covered by professional privilege and handled with the utmost discretion.'),
+    urgent: () => L('Si es una urgencia (citación judicial, plazo inminente, medida cautelar), llámenos ahora al ' + C.phone + ' o escriba por WhatsApp. También puedo registrar su caso como urgente.', 'If it is urgent (court summons, imminent deadline, injunction), call us now at ' + C.phone + ' or message on WhatsApp. I can also log your matter as urgent.'),
     advice: () => L('No puedo ofrecer asesoría jurídica, pero un abogado de ZTM sí podrá orientarle. Si quiere, registro su caso para que le contacten.', 'I cannot give legal advice, but a ZTM attorney can guide you. If you like, I can log your matter so they contact you.')
   };
   function intent(t) {

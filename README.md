@@ -17,8 +17,13 @@ Preloader · floating glass nav + fullscreen menu · Three.js gold 3D object ove
 - **WhatsApp**: floating button + contact CTA, prefilled message (`js/config.js` → `whatsapp`).
 - **AI receptionist**: guided intake (area → urgency → summary → name → contact) that POSTs to `/api/lead`, falls back to a one-click WhatsApp hand-off. Free text is answered by `/api/chat` (Claude) if `ANTHROPIC_API_KEY` is set, otherwise by a local keyword engine. It never gives legal advice.
 
-## Configure before launch
-1. **`js/config.js`**: phone, WhatsApp number, email, address, social links, stats. **All values are placeholders.**
-2. Replace placeholder content in `index.html` / `js/i18n.js`: team names/roles/photos, testimonials, insight articles, practice-area copy. The original site could not be fetched from the build environment, so copy was written generically.
-3. Vercel env vars: `ANTHROPIC_API_KEY` (optional, enables LLM chat), `LEAD_WEBHOOK_URL` (Slack/Zapier/CRM; without it `/api/lead` returns 503 and the UI falls back to mailto/WhatsApp), optional `ANTHROPIC_MODEL`.
-4. Add real privacy policy / legal notice pages and check bar-advertising rules for your jurisdiction.
+## Content source
+Real content was taken from ztm-abogados.com (Oct 2026): firm history, mission/vision, 10 practice areas, partners and associates, address, phone, email, map and two news articles. Photos live in `assets/img/raw` and are optimised to WebP with `node scripts/optimize-images.mjs`.
+
+## Still needed from the firm
+1. **`js/config.js` → `whatsapp`**: a Bolivian mobile number (digits, international format, e.g. `59170000000`). Until set, WhatsApp buttons open WhatsApp's contact picker with the message prefilled.
+2. Associate roles: the 7 associates are named from their photo filenames (the old site shows no names or roles). Confirm names, and say which belong to Litigation vs Corporate.
+3. Larry Monasterios Torrico has no photo or bio on the old site (placeholder monogram).
+4. Real testimonials/case results, if the firm wants them (none were published, so none are invented).
+5. Privacy policy / legal notice pages; Facebook and any other social links.
+6. Vercel env vars: `ANTHROPIC_API_KEY` (optional, LLM answers in the chat) and `LEAD_WEBHOOK_URL` (Slack/Zapier/CRM; without it `/api/lead` returns 503 and the UI falls back to mailto/WhatsApp).

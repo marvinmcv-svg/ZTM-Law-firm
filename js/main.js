@@ -21,7 +21,7 @@
   }));
 
   /* ---------- WhatsApp links ---------- */
-  function waLink(text) { return 'https://wa.me/' + C.whatsapp + '?text=' + encodeURIComponent(text); }
+  function waLink(text) { return 'https://wa.me/' + (C.whatsapp || '') + '?text=' + encodeURIComponent(text); }
   window.ZTM_waLink = waLink;
   $$('[data-wa]').forEach(a => a.href = waLink(window.ZTM_I18N.lang === 'en' ? 'Hello, I would like to request a consultation with ZTM Abogados.' : 'Hola, quisiera solicitar una consulta con ZTM Abogados.'));
   document.addEventListener('langchange', () => $$('[data-wa]').forEach(a => a.href = waLink(window.ZTM_I18N.lang === 'en' ? 'Hello, I would like to request a consultation with ZTM Abogados.' : 'Hola, quisiera solicitar una consulta con ZTM Abogados.')));
@@ -80,7 +80,8 @@
   $$('[data-count]').forEach(el => {
     const key = el.dataset.count.replace('cfg:', ''), end = C.stats[key], o = { v: 0 };
     const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
-    const fmt = n => pre.replace('&lt;', '<') + Math.round(n).toLocaleString('en-US') + suf;
+    const plain = el.hasAttribute('data-plain');
+    const fmt = n => pre.replace('&lt;', '<') + (plain ? String(Math.round(n)) : Math.round(n).toLocaleString('en-US')) + suf;
     el.textContent = fmt(0);
     ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => gsap.to(o, { v: end, duration: 2.4, ease: 'power3.out', onUpdate: () => el.textContent = fmt(o.v) }) });
   });
@@ -186,7 +187,7 @@
     try {
       const r = await fetch(C.leadEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ source: 'form', lang: window.ZTM_I18N.lang }, fd)) });
       if (!r.ok) throw new Error('bad');
-      msg.className = 'form__msg is-ok'; msg.textContent = en ? 'Thank you. An attorney will contact you within 24 hours.' : 'Gracias. Un abogado le contactará en menos de 24 horas.'; form.reset();
+      msg.className = 'form__msg is-ok'; msg.textContent = en ? 'Thank you. An attorney from our team will contact you.' : 'Gracias. Un abogado de nuestro equipo se pondrá en contacto con usted.'; form.reset();
     } catch (err) { // graceful fallback: open the user's mail client
       location.href = 'mailto:' + C.email + '?subject=' + encodeURIComponent('Consulta web: ' + fd.area) + '&body=' + encodeURIComponent(fd.message + '\n\n' + fd.name + ' · ' + fd.email + ' · ' + (fd.phone || ''));
       msg.className = 'form__msg is-ok'; msg.textContent = en ? 'Opening your email app…' : 'Abriendo su aplicación de correo…';
